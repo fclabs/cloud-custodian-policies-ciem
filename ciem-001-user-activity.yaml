@@ -1,0 +1,13 @@
+policies:
+  - name: users-without-activity-90-days
+    description: |
+        find any IAM users without activity for the last 90 days
+    resource: aws.iam-user
+    filters:
+      - type: usage
+        LastAuthenticated:
+          type: value
+          value_type: age
+          op: less-than
+          value: 90
+        match-operator: any
